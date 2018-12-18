@@ -17,9 +17,7 @@ class Server {
   public config(): void {
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
-    this.app.get("/", (req,res)=>{
-      res.sendFile(path.join(__dirname, "../public","index.html"))
-    });
+
     this.app.use(express.static(path.resolve(__dirname, "../public")));
 
     this.app.listen(8080, ()=>{
