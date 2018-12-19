@@ -1,5 +1,6 @@
 import React from "react";
 import Assignment from "./assignment.jsx"
+import axios from "axios";
 class App extends React.Component{
   constructor(){
     super();
@@ -10,12 +11,35 @@ class App extends React.Component{
   }
 
   componentDidMount(){
-    //Get Assignments
+    console.log("Component Did Mount")
+    //Get Assignments- all so no params
+    axios.get("/assignments")
+    .then((response)=>{
+      console.log("and Did get assignments")
+      console.log(response);
+      let phonyAssignment = this.state.assignmentList;
+
+      let assignment = {
+        id: this.state.assignmentId,
+        assignment: response.data.message,
+        tasks: []
+      }
+
+      phonyAssignment.push(assignment);
+
+      this.setState({
+        assignmentList: phonyAssignment
+      })
+      //set assignmentList
+    })
+    .catch((error)=>{
+      console.log("Error: ", error)
+    })
   }
 
 
   handleAddAssignment=()=>{
-//POST ASSIGNMENT
+//POST ASSIGNMENT then GET ASSIGNMENT
     let assignment = {
       id: this.state.assignmentId,
       assignment: document.getElementById("assignment__input").value,
