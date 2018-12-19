@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const bodyParser = __importStar(require("body-parser"));
 const path = __importStar(require("path"));
+const cors_1 = __importDefault(require("cors"));
 const assignments_1 = require("./controllers/assignments");
 const AssignRouter = new assignments_1.AssignController();
 const tasks_1 = require("./controllers/tasks");
@@ -36,6 +37,14 @@ class Server {
     }
     routes() {
         const router = express_1.default.Router();
+        const corsOptions = {
+            allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
+            credentials: true,
+            methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+            origin: "http://localhost:8000",
+            preflightContinue: false
+        };
+        router.use(cors_1.default(corsOptions));
         this.app.use("/", router);
         this.app.get("/assignments", AssignRouter.router);
         this.app.get("/assignments/:id", AssignRouter.router);

@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 import * as bodyParser from "body-parser";
 import * as path from "path";
-import * as cors from 'cors';
+import cors from 'cors';
 
 import { AssignController } from "./controllers/assignments";
 const AssignRouter: AssignController = new AssignController();
@@ -35,6 +35,15 @@ class Server {
 
   public routes(): void {
     const router: express.Router = express.Router();
+    const corsOptions: cors.CorsOptions = {
+      allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
+      credentials: true,
+      methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+      origin: "http://localhost:8000",
+      preflightContinue: false
+    };
+    router.use(cors(corsOptions));
+
     this.app.use("/", router);
     this.app.get("/assignments", AssignRouter.router);
     this.app.get("/assignments/:id", AssignRouter.router);

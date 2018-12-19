@@ -13,7 +13,7 @@ class App extends React.Component{
   componentDidMount(){
     console.log("Component Did Mount")
     //Get Assignments- all so no params
-    axios.get("/assignments")
+    axios.get("http://localhost:8080/assignments")
     .then((response)=>{
       console.log("and Did get assignments")
       console.log(response);
