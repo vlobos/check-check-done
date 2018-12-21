@@ -20,9 +20,6 @@ class AssignController {
             }
         });
     }
-    getOne(req, res) {
-        // TO DO      
-    }
     postAssignment(req, res) {
         // TO DO
         let assignment = req.body;
@@ -40,7 +37,6 @@ class AssignController {
     routes() {
         this.router.get('/assignments', this.getAll);
         this.router.post('/assignments', this.postAssignment);
-        this.router.get("/assignments/:id", this.getOne);
     }
 }
 exports.AssignController = AssignController;
