@@ -1,5 +1,7 @@
 import { Request, Response, Router } from 'express';
 
+import { AssignModel } from "../models/assignments"
+
 export class AssignController {
   public router: Router;
 
@@ -8,28 +10,25 @@ export class AssignController {
     this.routes();
   }
 
-  public getAll(req: Request, res: Response): void {
-//get all
-    console.log("Assignment Controller: All");
-    res.status(200).send({
-      message: 'GET request successfulll!!!!'
-  })
-  }
-
-  public getOne(req: Request, res: Response): void {
-    //get one assignment to prepare task posting
-    console.log("Getting one!!")
-    res.status(200).send({
-      message: 'GET ONE request successfulll!!!!'
+  public getAll(res: Response): void {
+    console.log("CONTROLLER: getAll");
+    AssignModel.getAll((err: any, results: object)=>{
+      if(err){
+        throw err;
+      }else{
+        console.log("CONTROLLER: sending data!")
+        let data = JSON.parse(results.toString());
+        res.status(200).send({ data })
+      }
     })
   }
 
+  public getOne(req: Request, res: Response): void {
+    // TO DO      
+  }
+
   public postAssignment(req: Request, res: Response): void {
-//post
-  console.log("Posting!!")
-  res.status(200).send({
-    message: 'POST request successfulll!!!!'
-  })
+    // TO DO
   }
 
   // set up routes
