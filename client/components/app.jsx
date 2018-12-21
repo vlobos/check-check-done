@@ -5,32 +5,23 @@ class App extends React.Component{
   constructor(){
     super();
     this.state = {
-      assignmentId : 1,
+      assignmentId : '',
       assignmentList : []
     }
   }
 
   componentDidMount(){
     console.log("Component Did Mount")
-    //Get Assignments- all so no params
     axios.get("http://localhost:8080/assignments")
     .then((response)=>{
-      console.log("and Did get assignments")
-      console.log(response);
-      let phonyAssignment = this.state.assignmentList;
-
-      let assignment = {
-        id: this.state.assignmentId,
-        assignment: response.data.message,
-        tasks: []
-      }
-
-      phonyAssignment.push(assignment);
-
+      console.log("App comp. receiving ALL assignments.")
+      let assignmentList = response.data.data;
+      let assignmentId = assignmentList[assignmentList.length-1].id;
+      console.log(assignmentId)
       this.setState({
-        assignmentList: phonyAssignment
+        assignmentId: assignmentId,
+        assignmentList: assignmentList
       })
-      //set assignmentList
     })
     .catch((error)=>{
       console.log("Error: ", error)
@@ -40,18 +31,31 @@ class App extends React.Component{
 
   handleAddAssignment=()=>{
 //POST ASSIGNMENT then GET ASSIGNMENT
-    let assignment = {
-      id: this.state.assignmentId,
-      assignment: document.getElementById("assignment__input").value,
-      tasks: []
-    }
-    document.getElementById("assignment__input").value = "";
-    let assignmentList = this.state.assignmentList
-    assignmentList.push(assignment);
-    this.setState({
-      assignmentId : this.state.assignmentId+1,
-      assignmentList: assignmentList
-    })
+
+  let assignment = {
+    id: this.state.assignmentId,
+    assignment: document.getElementById("assignment__input").value,
+    tasks: []
+  }
+  document.getElementById("assignment__input").value = "";
+  let assignmentList = this.state.assignmentList
+  assignmentList.push(assignment);
+  axios.post("http://localhost:8080/assignments",{
+    key: "assignments",
+    value: assignmentList
+  })
+  .then((data)=>{
+    console.log("AssignmentList: ", assignmentList)
+    console.log("POSTED");
+    console.log("Should be message: ", data)
+  })
+  .catch((error)=>{
+    console.log("Error: ", error)
+  })
+  this.setState({
+    assignmentId : this.state.assignmentId+1,
+    assignmentList: assignmentList
+  })
   };
 
   handleAddTask=(id)=>{
