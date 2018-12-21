@@ -27,6 +27,19 @@ class App extends React.Component{
     })
   }
 
+  postAssignment = (assignmentList, increase) =>{
+    axios.post("http://localhost:8080/assignments", assignmentList)
+    .then(()=>{
+      console.log("POSTED");
+    })
+    .catch((error)=>{
+      console.log("Error: ", error)
+    })
+    this.setState({
+      assignmentId : this.state.assignmentId+increase,
+      assignmentList: assignmentList
+    })
+  }
 
   handleAddAssignment=()=>{
   //POST ASSIGNMENT
@@ -38,21 +51,11 @@ class App extends React.Component{
     document.getElementById("assignment__input").value = "";
     let assignmentList = this.state.assignmentList
     assignmentList.push(assignment);
-    axios.post("http://localhost:8080/assignments", assignmentList)
-    .then(()=>{
-      console.log("POSTED");
-    })
-    .catch((error)=>{
-      console.log("Error: ", error)
-    })
-    this.setState({
-      assignmentId : this.state.assignmentId+1,
-      assignmentList: assignmentList
-    })
+    this.postAssignment(assignmentList, 1);
   };
 
+  //id parameter supplied at task.jsx
   handleAddTask=(id)=>{
-  //GET ASSIGNMENT
     let assignment = this.state.assignmentList[id-1];
     let taskList = assignment.tasks;
     let task = {
@@ -60,12 +63,10 @@ class App extends React.Component{
       done: false,
     }
     document.getElementById(`task__input__${id}`).value = "";
-    //POST TASK...UPDATE TASK??
-    taskList.push(task);
 
-    this.setState({
-      assignmentList: this.state.assignmentList
-    });
+    taskList.push(task);
+    let assignmentList = this.state.assignmentList;
+    this.postAssignment(assignmentList, 0);
   };
 
 
