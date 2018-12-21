@@ -1,0 +1,140 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: left;
+  cursor: default;
+  color: #030002
+}
+
+body {
+  background:  rgb(0, 0, 0);
+  font-weight: 300;
+  font-size: 40px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+}
+/*---- Container ---- */
+container {
+  width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
+}
+/*----Shared Elements----*/
+input{
+  background: none;
+  border: none;
+  border-bottom: 2px solid #030002;
+  padding: 0 0 0 15px;
+  color: #030002;
+  outline: none
+}
+
+::placeholder{
+  color: #03000277
+}
+
+button{
+  background: #e8c6a3;
+  border: none;
+  padding: 0 15px;
+  outline: none
+}
+/*---Aside---*/
+aside {
+  width: 50%;
+  background: #d75630;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 60px 10px 60px 10px;
+  padding: 15px;
+}
+
+#title{
+  font-size: 140px;
+  font-weight: 500
+}
+
+#new__assignment{
+  text-align: center;
+  margin: 20px 0
+}
+
+/*----Main----*/
+main {
+  width: 50%;
+  background: #284452;
+  font-size: 35px;
+  margin: 60px 10px 60px 10px;
+  padding: 15px 0;
+  overflow-y: auto;
+  overflow-x: hidden
+}
+
+/* SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #030002
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d75630; 
+}
+
+
+/*----Assignments list------*/
+
+ul {
+  padding: 0;
+  list-style: none
+}
+
+li.assignment{
+  background: #e8c6a3;
+  padding: 10px 30px ;
+  font-weight: 500
+}
+
+/* --------Tasks list--------- */
+li.task{
+  padding: 5px 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.task__text{
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+li > div.triangle{
+  margin-right: 10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 15px;
+  border-color: transparent transparent transparent #d75630;
+}
+
+#new__task{
+  text-align: right;
+  margin: 10px 0
+}
