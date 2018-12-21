@@ -16,8 +16,6 @@ const path = __importStar(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const assignments_1 = require("./controllers/assignments");
 const AssignRouter = new assignments_1.AssignController();
-const tasks_1 = require("./controllers/tasks");
-const TaskRouter = new tasks_1.TaskController();
 //server class
 class Server {
     constructor() {
@@ -47,9 +45,7 @@ class Server {
         router.use(cors_1.default(corsOptions));
         this.app.use("/", router);
         this.app.get("/assignments", AssignRouter.router);
-        this.app.get("/assignments/:id", AssignRouter.router);
         this.app.post("/assignments", AssignRouter.router);
-        this.app.post("/tasks", TaskRouter.router);
     }
 }
 exports.default = new Server().app;

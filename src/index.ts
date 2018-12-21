@@ -5,9 +5,6 @@ import cors from 'cors';
 
 import { AssignController } from "./controllers/assignments";
 const AssignRouter: AssignController = new AssignController();
-import { TaskController } from "./controllers/tasks";
-const TaskRouter: TaskController = new TaskController();
-
 
 //server class
 class Server {
@@ -46,9 +43,7 @@ class Server {
 
     this.app.use("/", router);
     this.app.get("/assignments", AssignRouter.router);
-    this.app.get("/assignments/:id", AssignRouter.router);
     this.app.post("/assignments", AssignRouter.router);  
-    this.app.post("/tasks", TaskRouter.router);
   }
 
 }
