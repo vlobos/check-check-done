@@ -11,8 +11,20 @@ export const AssignModel = {
       if(err){
         throw err;
       }else{
-        console.log("MODEL: no error")
-        callback(err, data)
+        console.log("MODEL: no error in getAll")
+        callback(err, data);
+      }
+    })
+  },
+
+  postAssignment(assignment: any, callback: any){
+    console.log("MODEL: postAssignment fired");
+    fs.writeFile(dataFile, JSON.stringify(assignment), (err) =>{
+      if(err){
+        throw err;
+      }else {
+        console.log("MODEL: no error in postAssignment");
+        callback(err);
       }
     })
   }

@@ -5,7 +5,7 @@ class App extends React.Component{
   constructor(){
     super();
     this.state = {
-      assignmentId : '',
+      assignmentId : 0,
       assignmentList : []
     }
   }
@@ -17,7 +17,6 @@ class App extends React.Component{
       console.log("App comp. receiving ALL assignments.")
       let assignmentList = response.data.data;
       let assignmentId = assignmentList[assignmentList.length-1].id;
-      console.log(assignmentId)
       this.setState({
         assignmentId: assignmentId,
         assignmentList: assignmentList
@@ -30,32 +29,26 @@ class App extends React.Component{
 
 
   handleAddAssignment=()=>{
-//POST ASSIGNMENT then GET ASSIGNMENT
-
-  let assignment = {
-    id: this.state.assignmentId,
-    assignment: document.getElementById("assignment__input").value,
-    tasks: []
-  }
-  document.getElementById("assignment__input").value = "";
-  let assignmentList = this.state.assignmentList
-  assignmentList.push(assignment);
-  axios.post("http://localhost:8080/assignments",{
-    key: "assignments",
-    value: assignmentList
-  })
-  .then((data)=>{
-    console.log("AssignmentList: ", assignmentList)
-    console.log("POSTED");
-    console.log("Should be message: ", data)
-  })
-  .catch((error)=>{
-    console.log("Error: ", error)
-  })
-  this.setState({
-    assignmentId : this.state.assignmentId+1,
-    assignmentList: assignmentList
-  })
+  //POST ASSIGNMENT
+    let assignment = {
+      id: this.state.assignmentId+1,
+      assignment: document.getElementById("assignment__input").value,
+      tasks: []
+    }
+    document.getElementById("assignment__input").value = "";
+    let assignmentList = this.state.assignmentList
+    assignmentList.push(assignment);
+    axios.post("http://localhost:8080/assignments", assignmentList)
+    .then(()=>{
+      console.log("POSTED");
+    })
+    .catch((error)=>{
+      console.log("Error: ", error)
+    })
+    this.setState({
+      assignmentId : this.state.assignmentId+1,
+      assignmentList: assignmentList
+    })
   };
 
   handleAddTask=(id)=>{

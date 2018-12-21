@@ -10,7 +10,7 @@ export class AssignController {
     this.routes();
   }
 
-  public getAll(res: Response): void {
+  public getAll(req: Request, res: Response): void {
     console.log("CONTROLLER: getAll");
     AssignModel.getAll((err: any, results: object)=>{
       if(err){
@@ -29,6 +29,15 @@ export class AssignController {
 
   public postAssignment(req: Request, res: Response): void {
     // TO DO
+    let assignment = req.body;
+    AssignModel.postAssignment(assignment, (err: any, results: object)=>{
+      if(err){
+        throw err;
+      }else{
+        console.log("CONTROLLER: Posting data!");
+        res.status(200);
+      }
+    })
   }
 
   // set up routes
