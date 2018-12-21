@@ -23,10 +23,6 @@ export class AssignController {
     })
   }
 
-  public getOne(req: Request, res: Response): void {
-    // TO DO      
-  }
-
   public postAssignment(req: Request, res: Response): void {
     // TO DO
     let assignment = req.body;
@@ -43,7 +39,6 @@ export class AssignController {
   // set up routes
   public routes() {
     this.router.get('/assignments', this.getAll);
-    this.router.post('/assignments', this.postAssignment);
-    this.router.get("/assignments/:id", this.getOne);
+    this.router.post('/assignments', this.postAssignment)
   }
 }
