@@ -26,13 +26,15 @@ class Assignments extends React.Component{
         </li>
         {this.state.showingTask && 
           <React.Fragment>
-            <ul>
+            <ul id="tasks__list">
               {taskList.map((task, index)=>{
                 return <Task task={task} key={index}></Task>
               })}
             </ul>
-            <input id={`task__input__${this.props.assignmentData.id}`} placeholder="New Task"></input>
-            <button onClick={()=> {this.props.handleAddTask(this.props.assignmentData.id)}}>Add</button> 
+            <div id="new__task">
+              <input id={`task__input__${this.props.assignmentData.id}`} placeholder="New Task"></input>
+              <button onClick={()=> {this.props.handleAddTask(this.props.assignmentData.id)}}>add</button> 
+            </div>
           </React.Fragment>
         }
       </React.Fragment>

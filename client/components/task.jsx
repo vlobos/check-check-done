@@ -7,7 +7,10 @@ class Tasks extends React.Component{
 
   render(){
     return ( 
-      <li>{this.props.task.task}</li>
+      <li className="task">
+        <div className="triangle"></div>
+        <div className="task__text">{this.props.task.task}</div>
+      </li>
     )
   }
 }

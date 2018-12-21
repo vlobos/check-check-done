@@ -1,6 +1,8 @@
 import React from "react";
 import Assignment from "./assignment.jsx"
 import axios from "axios";
+import "../styles/styles.css";
+
 class App extends React.Component{
   constructor(){
     super();
@@ -73,15 +75,20 @@ class App extends React.Component{
   render(){
     return(
       <React.Fragment>
-        <ul>
-          {this.state.assignmentList.map((assignment, index) => {
-            return <Assignment assignmentData={assignment} key={index} handleAddTask={this.handleAddTask}></Assignment>
-          })}
-        </ul>
-        <div>
-          <input id="assignment__input" placeholder="New Assignment"></input>
-          <button onClick={this.handleAddAssignment}>Add</button>
-        </div>
+        <aside className="container__col">
+          <div id="title">Check, check, done!</div>
+          <div id="new__assignment">
+            <input id="assignment__input" placeholder="New Assignment"></input>
+            <button onClick={this.handleAddAssignment}>add</button>
+          </div>
+        </aside>
+        <main className="container__col">
+          <ul>
+            {this.state.assignmentList.map((assignment, index) => {
+              return <Assignment assignmentData={assignment} key={index} handleAddTask={this.handleAddTask}></Assignment>
+            })}
+          </ul>
+        </main>
       </React.Fragment>
     )
   }
