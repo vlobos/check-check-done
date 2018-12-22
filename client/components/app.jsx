@@ -83,7 +83,7 @@ class App extends React.Component{
           </div>
         </aside>
         <main className="container__col">
-          <ul>
+          <ul id="assignments__list">
             {this.state.assignmentList.map((assignment, index) => {
               return <Assignment assignmentData={assignment} key={index} handleAddTask={this.handleAddTask}></Assignment>
             })}
